@@ -1,0 +1,87 @@
+{
+  "Language": {
+    "Change": "Смена языка",
+    "RU": "Русский",
+    "EN": "English"
+  },
+  "Header": {
+    "Inbox": "Входящие",
+    "Admin": "Админ панель"
+  },
+  "LoginPage": {
+    "Title": "Вход в аккаунт",
+    "Description": "Введите email ниже, чтобы войти в аккаунт",
+    "Email": "Email",
+    "Password": "Пароль",
+    "Login": "Войти",
+    "Incorrect": "Неверный email или пароль"
+  },
+  "FieldRules": {
+    "email_required": "Некорректный email",
+    "length_min": "Минимальная длина: {0}",
+    "length_max": "Максимальная длина: {0}",
+    "length_min_max": "Длина должна быть от {0} до {1}",
+    "number_min": "Минимальное значение: {0}",
+    "number_max": "Максимальное значение: {0}",
+    "contains_letter_number_special": "Хотя бы одна буква, цифра и спецсимвол."
+  },
+  "Sidebar": {
+    "Folders": "Папки",
+    "Inbox": "Входящие",
+    "LastMessages": "Последние сообщения"
+  },
+  "UserNav": {
+    "Admin": "Админ панель",
+    "Settings": "Настройки",
+    "Logout": "Выйти"
+  },
+  "UserTable": {
+    "Id": "Id",
+    "Email": "Email",
+    "Roles": "Роли",
+    "Action": "Действие",
+    "EmailFilter": "Поиск по email"
+  },
+  "UserCreate": {
+    "Button": "Создать пользователя",
+    "Title": "Создание пользователя",
+    "Description": "Заполните все поля.",
+    "Email": "Email",
+    "Password": "Пароль",
+    "Create": "Создать",
+    "Conflict": "Указанный email уже занят"
+  },
+  "UserEdit": {
+    "Title": "Редактировать пользователя",
+    "Description": "Внесите изменения в настройки пользователя здесь.",
+    "Password": "Пароль",
+    "Save": "Сохранить изменения",
+    "ChangePasssword": "Изменить пароль"
+  },
+  "MailboxEdit": {
+    "Host": "Хост",
+    "Port": "Порт",
+    "Secure": "Безопаcтное соединение",
+    "Password": "Пароль"
+  },
+  "UserDelete": {
+    "Title": "Вы абсолютно уверены?",
+    "Description": "Это действие невозможно отменить. Это приведет к необратимому удалению учетной записи.",
+    "Cancel": "Отмена",
+    "Continue": "Продолжить"
+  },
+  "UserHistory": {
+    "Title": "История авторизаций",
+    "Description": "Здесь отображается история авторизаций пользователя.",
+    "IP": "IP-адрес",
+    "UserAgent": "User-Agent",
+    "Country": "Страна",
+    "CreatedDate": "Дата авторизации",
+    "IPFilter": "Поиск по IP"
+  },
+  "Mail": {
+    "From": "От:",
+    "To": "Кому:",
+    "Date": "Дата:"
+  }
+}

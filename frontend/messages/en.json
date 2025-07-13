@@ -1,0 +1,87 @@
+{
+  "Language": {
+    "Change": "Select Lang",
+    "RU": "Русский",
+    "EN": "English"
+  },
+  "Header": {
+    "Inbox": "Inbox",
+    "Admin": "Admin"
+  },
+  "LoginPage": {
+    "Title": "Login to your account",
+    "Description": "Enter your email below to login to your account",
+    "Email": "Email",
+    "Password": "Password",
+    "Login": "Login",
+    "Incorrect": "Incorrect email or password."
+  },
+  "FieldRules": {
+    "email_required": "Invalid email",
+    "length_min": "Minimum length: {0}",
+    "length_max": "Maximum length: {0}",
+    "length_min_max": "Length must be between {0} and {1}",
+    "number_min": "Minimum value: {0}",
+    "number_max": "Maximum value: {0}",
+    "contains_letter_number_special": "One letter, digit, and special char required."
+  },
+  "Sidebar": {
+    "Folders": "Folders",
+    "Inbox": "Inbox",
+    "LastMessages": "Last messages"
+  },
+  "UserNav": {
+    "Admin": "Admin",
+    "Settings": "Settings",
+    "Logout": "Log out"
+  },
+  "UserTable": {
+    "Id": "Id",
+    "Email": "Email",
+    "Roles": "Roles",
+    "Action": "Action",
+    "EmailFilter": "Search by email"
+  },
+  "UserCreate": {
+    "Button": "Create user",
+    "Title": "Create user",
+    "Description": "Fill in all fields.",
+    "Email": "Email",
+    "Password": "Password",
+    "Create": "Create",
+    "Conflict": "This email address is taken."
+  },
+  "UserEdit": {
+    "Title": "Edit user",
+    "Description": "Make changes to user here.",
+    "Password": "Password",
+    "Save": "Save changes",
+    "ChangePasssword": "Change password"
+  },
+  "MailboxEdit": {
+    "Host": "Host",
+    "Port": "Port",
+    "Secure": "Secure connection",
+    "Password": "Password"
+  },
+  "UserDelete": {
+    "Title": "Are you absolutely sure?",
+    "Description": "This action cannot be undone. This will permanently delete account.",
+    "Cancel": "Cancel",
+    "Continue": "Continue"
+  },
+  "UserHistory": {
+    "Title": "Login History",
+    "Description": "This section displays the user's login history.",
+    "IP": "IP Address",
+    "UserAgent": "User-Agent",
+    "Country": "Country",
+    "CreatedDate": "Login Date",
+    "IPFilter": "Search by IP"
+  },
+  "Mail": {
+    "From": "From:",
+    "To": "To:",
+    "Date": "Date:"
+  }
+}
