@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+
 import { useTranslations } from 'next-intl';
 
 import { Button } from '@/components/ui/shared/button';
@@ -12,7 +13,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/shared/dialog';
-
 import {
   Tabs,
   TabsContent,
@@ -20,12 +20,12 @@ import {
   TabsTrigger,
 } from '@/components/ui/shared/tabs';
 
-import UserSingleCreate from './single-create';
 import UserBulkCreate from './bulk-create';
+import UserSingleCreate from './single-create';
 
 export default function UserCreate() {
   const t = useTranslations('UserCreate');
-  
+
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState<'single' | 'bulk'>('single');
 

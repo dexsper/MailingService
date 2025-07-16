@@ -5,14 +5,16 @@ import { JSX, useState } from 'react';
 import {
   ColumnDef,
   ColumnFiltersState,
+  SortingState,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
   getSortedRowModel,
-  SortingState,
   useReactTable,
 } from '@tanstack/react-table';
 
+import { Input } from '@/components/ui/shared/input';
+import { Skeleton } from '@/components/ui/shared/skeleton';
 import {
   Table,
   TableBody,
@@ -21,9 +23,6 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/shared/table';
-
-import { Input } from '@/components/ui/shared/input';
-import { Skeleton } from '@/components/ui/shared/skeleton';
 
 export interface DataTableFilter<TData> {
   accessorKey: keyof TData;

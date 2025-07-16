@@ -1,12 +1,13 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
+
 import { usePathname } from '@/i18n/navigation';
 
 import { Separator } from '@/components/ui/shared/separator';
 import { SidebarTrigger } from '@/components/ui/shared/sidebar';
 
 import Header from './app-header';
-import { useTranslations } from 'next-intl';
 
 export default function MailHeader() {
   const pathname = usePathname();

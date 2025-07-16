@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "format": "prettier --write .",
     "generate:api": "npx openapi-typescript http://localhost:3001/docs-json -o ./src/lib/api/v1.d.ts"
   },
   "dependencies": {
@@ -42,6 +43,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
+    "@trivago/prettier-plugin-sort-imports": "^5.2.2",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

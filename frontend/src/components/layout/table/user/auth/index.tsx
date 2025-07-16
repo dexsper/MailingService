@@ -3,6 +3,7 @@
 import { useTranslations } from 'next-intl';
 
 import { $api } from '@/lib/api';
+
 import { UserAuthLog } from '@/types/user';
 
 import { DataTable, DataTableFilter } from '@/components/ui/table/data-table';

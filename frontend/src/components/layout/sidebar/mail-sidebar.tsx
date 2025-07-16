@@ -1,12 +1,15 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
+import { RefreshCcw } from 'lucide-react';
 import { useUrlState } from 'state-in-url/next';
 
-import { $api } from '@/lib/api';
-import { mailState } from '@/types/state/mail';
+import { useEffect } from 'react';
 
-import { RefreshCcw } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+
+import { $api } from '@/lib/api';
+
+import { mailState } from '@/types/state/mail';
 
 import {
   Sidebar,
@@ -20,7 +23,6 @@ import {
 import { Skeleton } from '@/components/ui/shared/skeleton';
 
 import { AppSidebar } from './app-sidebar';
-import { useEffect } from 'react';
 
 export function MailSidebar({
   ...props

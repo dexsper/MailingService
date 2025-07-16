@@ -1,7 +1,12 @@
+import { Inbox } from 'lucide-react';
+
 import * as React from 'react';
-import { Link } from '@/i18n/navigation';
+
 import { useTranslations } from 'next-intl';
 
+import { Link } from '@/i18n/navigation';
+
+import { NavUser } from '@/components/layout/user/user.nav';
 import {
   Sidebar,
   SidebarContent,
@@ -13,10 +18,6 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/components/ui/shared/sidebar';
-
-import { Inbox } from 'lucide-react';
-
-import { NavUser } from '@/components/layout/user/user.nav';
 
 export function AppSidebar({
   children,

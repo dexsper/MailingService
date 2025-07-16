@@ -1,8 +1,7 @@
+import { getCookie as getCookieClient } from 'cookies-next/client';
+import { getCookie as getCookieServer } from 'cookies-next/server';
 import createFetchClient, { Middleware } from 'openapi-fetch';
 import createClient from 'openapi-react-query';
-
-import { getCookie as getCookieServer } from 'cookies-next/server';
-import { getCookie as getCookieClient } from 'cookies-next/client';
 
 import type { paths } from './v1';
 

@@ -1,8 +1,8 @@
+import createMiddleware from 'next-intl/middleware';
 import { NextResponse } from 'next/server';
 import type { NextFetchEvent, NextRequest } from 'next/server';
 
 import { routing } from '@/i18n/routing';
-import createMiddleware from 'next-intl/middleware';
 
 import { CustomMiddleware } from './chain';
 

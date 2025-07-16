@@ -2,5 +2,21 @@
   "semi": true,
   "singleQuote": true,
   "trailingComma": "all",
-  "printWidth": 80
+  "printWidth": 80,
+  "importOrder": [
+    "^react",
+    "^next",
+    "^@radix-ui/(.*)$",
+    "^@tanstack/(.*)$",
+    "^@/lib/(.*)$",
+    "^@/types/(.*)$",
+    "^@/hooks/(.*)$",
+    "^@/i18n/(.*)$",
+    "^@/middlewares/(.*)$",
+    "^@/components/(.*)$",
+    "^[./]"
+  ],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true,
+  "plugins": ["@trivago/prettier-plugin-sort-imports"]
 }

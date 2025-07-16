@@ -1,5 +1,5 @@
-import ThemeSwitch from '@/components/common/theme-switch';
 import LanguageSwitch from '@/components/common/lang-switch';
+import ThemeSwitch from '@/components/common/theme-switch';
 
 export default function Header({
   children,

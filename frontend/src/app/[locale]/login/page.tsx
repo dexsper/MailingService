@@ -1,6 +1,7 @@
+import { getCookie } from 'cookies-next/server';
+
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
-import { getCookie } from 'cookies-next/server';
 
 import LoginForm from '@/components/layout/forms/login';
 

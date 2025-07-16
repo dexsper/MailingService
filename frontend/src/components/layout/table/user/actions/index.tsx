@@ -10,8 +10,8 @@ import {
 } from '@/components/ui/shared/popover';
 
 import UserCheck from './check';
-import UserEdit from './edit';
 import UserDelete from './delete';
+import UserEdit from './edit';
 import UserHistory from './history';
 
 interface UserActionProps {

@@ -1,19 +1,21 @@
 'use client';
 
 import { useState } from 'react';
+
 import { useTranslations } from 'next-intl';
 
 import { $api } from '@/lib/api';
+import { parseMailString } from '@/lib/utils';
+
+import { MailboxState } from '@/types/mailbox';
+import { UserCreateState } from '@/types/user';
+
 import { useUsersTableStore } from '@/hooks/useStore';
 import { useValidationErrors } from '@/hooks/useValidationErrors';
 
-import { UserCreateState } from '@/types/user';
-import { MailboxState } from '@/types/mailbox';
-
-import { Button } from '@/components/ui/shared/button';
 import FormErrors from '@/components/ui/form/form-error';
 import FormField from '@/components/ui/form/form-field';
-import { parseMailString } from '@/lib/utils';
+import { Button } from '@/components/ui/shared/button';
 
 interface BulkUserCreateProps {
   open: boolean;

@@ -1,23 +1,23 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+
 import { useTranslations } from 'next-intl';
 
 import { $api, fetchClient } from '@/lib/api';
 import { parseMailString } from '@/lib/utils';
 
-import { UserCreateState, UserRole, UserRoles } from '@/types/user';
 import { MailboxState } from '@/types/mailbox';
+import { UserCreateState, UserRole, UserRoles } from '@/types/user';
 
 import { useUsersTableStore } from '@/hooks/useStore';
 import { useValidationErrors } from '@/hooks/useValidationErrors';
 
-import { Button } from '@/components/ui/shared/button';
+import { useUser } from '@/components/providers/user';
 import AutoForm from '@/components/ui/form/auto-form';
 import FormErrors from '@/components/ui/form/form-error';
-import { useUser } from '@/components/providers/user';
-import { Checkbox } from '@/components/ui/shared/checkbox';
 import FormField from '@/components/ui/form/form-field';
+import { Button } from '@/components/ui/shared/button';
 
 interface UserCreateProps {
   open: boolean;

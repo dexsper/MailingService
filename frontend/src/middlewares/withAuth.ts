@@ -1,8 +1,8 @@
+import { jwtDecode } from 'jwt-decode';
+
 import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 import type { NextFetchEvent, NextRequest } from 'next/server';
-
-import { jwtDecode } from 'jwt-decode';
 
 import { CustomMiddleware } from './chain';
 
@@ -11,7 +11,9 @@ const publicRoutes = ['login'];
 function redirectToLogin(request: NextRequest) {
   const protocol = request.nextUrl.protocol;
   const host = request.headers.get('host') ?? request.nextUrl.host;
-  const response = NextResponse.redirect(new URL('/login', `${protocol}//${host}`));
+  const response = NextResponse.redirect(
+    new URL('/login', `${protocol}//${host}`),
+  );
 
   response.cookies.set({
     name: 'session',

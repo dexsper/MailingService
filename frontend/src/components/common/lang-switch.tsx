@@ -1,20 +1,20 @@
 'use client';
 
-import { routing } from '@/i18n/routing';
-import { useSearchParams } from 'next/navigation';
-import { useLocale, useTranslations } from 'next-intl';
-import { useRouter, usePathname } from '@/i18n/navigation';
-
 import { Globe } from 'lucide-react';
 
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuCheckboxItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/shared/dropdown-menu';
+import { useLocale, useTranslations } from 'next-intl';
+import { useSearchParams } from 'next/navigation';
+
+import { usePathname, useRouter } from '@/i18n/navigation';
+import { routing } from '@/i18n/routing';
 
 import { Button } from '@/components/ui/shared/button';
+import {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+} from '@/components/ui/shared/dropdown-menu';
 
 export default function LanguageSwitch() {
   const router = useRouter();

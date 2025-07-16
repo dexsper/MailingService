@@ -1,14 +1,17 @@
 'use client';
 
-import { useFormatter, useTranslations } from 'next-intl';
 import { useUrlState } from 'state-in-url/next';
 
+import React, { useEffect, useRef, useState } from 'react';
+
+import { useFormatter, useTranslations } from 'next-intl';
+
 import { $api } from '@/lib/api';
+
 import { mailState } from '@/types/state/mail';
 
 import { Label } from '@/components/ui/shared/label';
 import { Skeleton } from '@/components/ui/shared/skeleton';
-import React, { useRef, useEffect, useState } from 'react';
 
 const injectedScript = `
 window.addEventListener('DOMContentLoaded', function() {
@@ -63,7 +66,7 @@ export default function MailView() {
 
           const scaleFactor = 1.2;
           const avgScale = (scaleW + scaleH) / 2;
-          
+
           setScale(Math.min(avgScale * scaleFactor, 1));
         }
       }

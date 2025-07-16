@@ -1,4 +1,5 @@
 import { useFormatter } from 'next-intl';
+
 import { ColumnDef } from '@tanstack/react-table';
 
 import { UserAuthLog } from '@/types/user';
@@ -38,7 +39,7 @@ export default function useAuthColumns(t: any): ColumnDef<UserAuthLog>[] {
       ),
     },
     {
-      id: "createdDate",
+      id: 'createdDate',
       accessorKey: 'createdDate',
       header: ({ column }) => (
         <DataTableColumnHeader column={column} title={t('CreatedDate')} />

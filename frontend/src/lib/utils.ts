@@ -1,8 +1,8 @@
-import { clsx, type ClassValue } from 'clsx';
+import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
-import { UserCreateState } from '@/types/user';
 import { MailboxState } from '@/types/mailbox';
+import { UserCreateState } from '@/types/user';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));

@@ -1,7 +1,14 @@
 'use client';
 
+import { Trash } from 'lucide-react';
+
 import { useState } from 'react';
+
 import { useTranslations } from 'next-intl';
+
+import { $api } from '@/lib/api';
+
+import { useUsersTableStore } from '@/hooks/useStore';
 
 import {
   AlertDialog,
@@ -13,13 +20,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '@/components/ui/shared/alert-dialog';
-
-import { Trash } from 'lucide-react';
-
-import { $api } from '@/lib/api';
-
 import { Button } from '@/components/ui/shared/button';
-import { useUsersTableStore } from '@/hooks/useStore';
 
 type UserDeleteProps = {
   id: number;
@@ -63,7 +64,11 @@ export default function UserDelete({ id }: UserDeleteProps) {
         </AlertDialogHeader>
         <AlertDialogFooter className="justify-end">
           <AlertDialogCancel>{t('Cancel')}</AlertDialogCancel>
-          <Button disabled={isPending} onClick={handleDelete} variant="destructive">
+          <Button
+            disabled={isPending}
+            onClick={handleDelete}
+            variant="destructive"
+          >
             {t('Continue')}
           </Button>
         </AlertDialogFooter>

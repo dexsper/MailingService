@@ -1,26 +1,24 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
-import { useTranslations } from 'next-intl';
-
 import { EllipsisVertical, LogOut, ShieldUser } from 'lucide-react';
 
+import { useTranslations } from 'next-intl';
+import { useRouter } from 'next/navigation';
+
+import { useUser } from '@/components/providers/user';
+import { Avatar, AvatarFallback } from '@/components/ui/shared/avatar';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/shared/dropdown-menu';
-
 import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
   useSidebar,
 } from '@/components/ui/shared/sidebar';
-
-import { useUser } from '@/components/providers/user';
-import { Avatar, AvatarFallback } from '@/components/ui/shared/avatar';
 
 export function NavUser() {
   const t = useTranslations('UserNav');

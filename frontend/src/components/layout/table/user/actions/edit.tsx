@@ -1,17 +1,21 @@
 'use client';
 
+import { Pencil } from 'lucide-react';
+
 import { useCallback, useEffect, useState } from 'react';
+
 import { useTranslations } from 'next-intl';
 
 import { $api, fetchClient } from '@/lib/api';
 import { parseMailString } from '@/lib/utils';
 
-import { UserUpdateState } from '@/types/user';
 import { MailboxState } from '@/types/mailbox';
+import { UserUpdateState } from '@/types/user';
+
 import { useValidationErrors } from '@/hooks/useValidationErrors';
 
-import { Pencil } from 'lucide-react';
-
+import AutoForm from '@/components/ui/form/auto-form';
+import { Button } from '@/components/ui/shared/button';
 import {
   Dialog,
   DialogContent,
@@ -20,9 +24,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/shared/dialog';
-
-import { Button } from '@/components/ui/shared/button';
-import AutoForm from '@/components/ui/form/auto-form';
 
 type UserEditProps = {
   id: number;

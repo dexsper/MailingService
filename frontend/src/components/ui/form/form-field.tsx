@@ -1,14 +1,14 @@
-import { useState } from 'react';
-
 import { Eye, EyeOff } from 'lucide-react';
 
-import { Label } from '@/components/ui/shared/label';
-import { Input } from '@/components/ui/shared/input';
+import { useState } from 'react';
+
 import { Button } from '@/components/ui/shared/button';
 import { Checkbox } from '@/components/ui/shared/checkbox';
+import { Input } from '@/components/ui/shared/input';
+import { Label } from '@/components/ui/shared/label';
 
-import FormErrors from './form-error';
 import { Textarea } from '../shared/textarea';
+import FormErrors from './form-error';
 
 type BaseFieldProps = {
   id: string;

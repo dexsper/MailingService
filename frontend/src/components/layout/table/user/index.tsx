@@ -1,17 +1,19 @@
 'use client';
 
 import { useEffect } from 'react';
+
 import { useTranslations } from 'next-intl';
 
 import { $api } from '@/lib/api';
+
 import { User } from '@/types/user';
+
 import { useUsersTableStore } from '@/hooks/useStore';
 
 import { DataTable, DataTableFilter } from '@/components/ui/table/data-table';
 
-import UserCreate from './actions/create';
 import UserBulkDelete from './actions/bulk-delete';
-
+import UserCreate from './actions/create';
 import { getUserColumns } from './columns';
 
 export default function UsersTable() {

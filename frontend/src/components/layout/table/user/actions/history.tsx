@@ -1,9 +1,8 @@
-import { useTranslations } from 'next-intl';
-
 import { History } from 'lucide-react';
 
-import { Button } from '@/components/ui/shared/button';
+import { useTranslations } from 'next-intl';
 
+import { Button } from '@/components/ui/shared/button';
 import {
   Dialog,
   DialogContent,
