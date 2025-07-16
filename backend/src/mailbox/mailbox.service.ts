@@ -68,10 +68,9 @@ export class MailboxService {
 
     try {
       await client.connect();
+      await client.logout();
     } catch (e) {
       throw new UnauthorizedException('Wrong imap client password');
-    } finally {
-      await client.logout();
     }
   }
 
