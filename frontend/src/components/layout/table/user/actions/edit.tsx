@@ -105,13 +105,15 @@ export default function UserEdit({ id }: UserEditProps) {
   }, [open, id, fetchMailbox]);
 
   useEffect(() => {
+    if (!open) return;
+
     const handler = (e: ClipboardEvent) => {
       const pastedText = e.clipboardData?.getData('text');
       if (!pastedText) return;
-      
+
       const parseResult = parseMailString(pastedText);
       if (!parseResult) return;
-      
+
       e.preventDefault();
       setUser(parseResult[0]);
       setMailbox(parseResult[1]);
@@ -119,7 +121,7 @@ export default function UserEdit({ id }: UserEditProps) {
 
     window.addEventListener('paste', handler);
     return () => window.removeEventListener('paste', handler);
-  }, []);
+  }, [open]);
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>

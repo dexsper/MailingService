@@ -7,6 +7,7 @@ import {
   MinLength,
   MaxLength,
   IsOptional,
+  IsEnum,
 } from 'class-validator';
 
 import { UserRole } from './user.entity';
@@ -50,4 +51,21 @@ export class UserDto {
     example: Object.values(UserRole),
   })
   roles: UserRole[];
+}
+
+export class UpdateUserRolesDto {
+  @IsEnum(UserRole, { each: true })
+  @ApiProperty({
+    isArray: true,
+    enum: UserRole,
+    example: Object.values(UserRole),
+  })
+  roles: UserRole[];
+}
+
+export class DeleteUsersByLoginDto {
+  @IsEmail({}, { each: true, message: 'email_required' })
+  @MaxLength(120, { each: true, message: 'length_max 120' })
+  @ApiProperty({ isArray: true, type: String, example: ['user@example.com'] })
+  logins: string[];
 }

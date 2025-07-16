@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/shared/button';
 import { Checkbox } from '@/components/ui/shared/checkbox';
 
 import FormErrors from './form-error';
+import { Textarea } from '../shared/textarea';
 
 type BaseFieldProps = {
   id: string;
@@ -32,10 +33,26 @@ type CheckboxFieldProps = BaseFieldProps & {
   onChange: (value: boolean) => void;
 };
 
-export type FormFieldProps = InputFieldProps | CheckboxFieldProps;
+type TextareaFieldProps = BaseFieldProps & {
+  type: 'textarea';
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+} & Omit<
+    React.InputHTMLAttributes<HTMLTextAreaElement>,
+    'value' | 'onChange' | 'type'
+  >;
+
+export type FormFieldProps =
+  | InputFieldProps
+  | CheckboxFieldProps
+  | TextareaFieldProps;
 
 function isCheckboxField(props: FormFieldProps): props is CheckboxFieldProps {
   return props.type === 'checkbox';
+}
+
+function isTextareaField(props: FormFieldProps): props is TextareaFieldProps {
+  return props.type === 'textarea';
 }
 
 export default function FormField(props: FormFieldProps) {
@@ -72,6 +89,26 @@ export default function FormField(props: FormFieldProps) {
     );
   }
 
+  if (isTextareaField(props)) {
+    const {
+      id,
+      label,
+      value,
+      onChange,
+      errors,
+      wrapperClassName = 'grid gap-3',
+      ...rest
+    } = props;
+
+    return (
+      <div className={wrapperClassName}>
+        {label && <Label htmlFor={id}>{label}</Label>}
+        <Textarea id={id} value={value} onChange={onChange} {...rest} />
+        <FormErrors id={id} errors={errors} />
+      </div>
+    );
+  }
+
   const {
     id,
     label,
@@ -79,7 +116,6 @@ export default function FormField(props: FormFieldProps) {
     value,
     onChange,
     errors,
-    placeholder,
     wrapperClassName = 'grid gap-3',
     ...rest
   } = props;
@@ -94,7 +130,6 @@ export default function FormField(props: FormFieldProps) {
         <Input
           id={id}
           type={inputType}
-          placeholder={placeholder}
           value={value}
           onChange={onChange}
           {...rest}

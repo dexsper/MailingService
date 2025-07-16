@@ -34,7 +34,7 @@ interface DataTableProps<TData, TValue> {
   data: TData[];
   columns: ColumnDef<TData, TValue>[];
   filters?: DataTableFilter<TData>[];
-  actions?: JSX.Element;
+  actions?: JSX.Element | JSX.Element[];
   isLoading?: boolean;
   defaultSorting?: SortingState;
 }
@@ -86,7 +86,9 @@ export function DataTable<TData, TValue>({
             />
           ))}
         </div>
-        <div className="flex items-center">{actions}</div>
+        <div className="flex gap-2 items-center">
+          {Array.isArray(actions) ? actions.map((action) => action) : actions}
+        </div>
       </div>
       <Table>
         <TableHeader>

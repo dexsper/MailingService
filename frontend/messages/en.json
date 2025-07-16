@@ -44,12 +44,19 @@
   },
   "UserCreate": {
     "Button": "Create user",
-    "Title": "Create user",
-    "Description": "Fill in all fields.",
+    "Single": "Single",
+    "Bulk": "Bulk",
+    "SingleTitle": "Create user",
+    "BulkTitle": "Create users",
+    "SingleDescription": "Fill in all fields.",
+    "BulkDescription": "Paste list in format: Login:EmailPassword:WebsitePassword:Host",
     "Email": "Email",
     "Password": "Password",
     "Create": "Create",
-    "Conflict": "This email address is taken."
+    "Conflict": "This email address is taken.",
+    "Role-user": "User",
+    "Role-admin": "Admin",
+    "Role-owner": "Owner"
   },
   "UserEdit": {
     "Title": "Edit user",
@@ -65,6 +72,9 @@
     "Password": "Password"
   },
   "UserDelete": {
+    "Button": "Delete users",
+    "BulkTitle": "Delete users",
+    "BulkDescription": "Paste list in format: Login:EmailPassword:WebsitePassword:Host",
     "Title": "Are you absolutely sure?",
     "Description": "This action cannot be undone. This will permanently delete account.",
     "Cancel": "Cancel",

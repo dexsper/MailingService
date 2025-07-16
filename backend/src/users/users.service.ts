@@ -3,8 +3,10 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
+
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Transactional } from 'typeorm-transactional';
+import { In, Repository } from 'typeorm';
 
 import { hashPassword } from '../common/crypt';
 
@@ -61,12 +63,24 @@ export class UsersService {
     };
   }
 
+  async updateRolesById(id: number, roles: UserRole[]) {
+    const user = await this.getById(id);
+    user.roles = roles;
+    await this.usersRepository.save(user);
+    return user;
+  }
+
   async deleteById(id: number) {
     const result = await await this.usersRepository.delete({
       id,
     });
 
     return result.affected > 0;
+  }
+
+  @Transactional()
+  async deleteByLogins(logins: string[]) {
+    await this.usersRepository.delete({ login: In(logins) });
   }
 
   async getById(id: number): Promise<UserEntity> {

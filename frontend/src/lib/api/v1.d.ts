@@ -73,23 +73,6 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/api/mailbox/{userId}/client/filters": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        /** Update user mailbox filters */
-        put: operations["MailboxController_updateFilters"];
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
     "/api/users/create": {
         parameters: {
             query?: never;
@@ -100,7 +83,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Create new user */
-        post: operations["UsersController_signup"];
+        post: operations["UsersController_createUser"];
         delete?: never;
         options?: never;
         head?: never;
@@ -125,6 +108,40 @@ export interface paths {
         patch: operations["UsersController_updateUser"];
         trace?: never;
     };
+    "/api/users/{userId}/roles": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /** Update the specified user roles. */
+        patch: operations["UsersController_updateUserRoles"];
+        trace?: never;
+    };
+    "/api/users/by-logins": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        /** Delete multiple users by their logins. */
+        delete: operations["UsersController_deleteUsersByLogins"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/users/all": {
         parameters: {
             query?: never;
@@ -132,8 +149,8 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Get all usersт. */
-        get: operations["UsersController_getAll"];
+        /** Get all users created by the admin. */
+        get: operations["UsersController_getAllCreated"];
         put?: never;
         post?: never;
         delete?: never;
@@ -210,6 +227,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/bulk/users": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Create new full users */
+        post: operations["BulkController_createFullUsers"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -247,13 +281,6 @@ export interface components {
             /** @example password123 */
             password: string;
         };
-        MailboxFilterDto: {
-            /** @example from:example@domain.com */
-            pattern: string;
-        };
-        MailboxFiltersDto: {
-            filters: components["schemas"]["MailboxFilterDto"][];
-        };
         CreateUserDto: {
             /** @example user@example.com */
             login: string;
@@ -266,13 +293,28 @@ export interface components {
             login: string;
             /** @example [
              *       "user",
-             *       "admin"
+             *       "admin",
+             *       "owner"
              *     ] */
-            roles: ("user" | "admin")[];
+            roles: ("user" | "admin" | "owner")[];
         };
         UpdateUserDto: {
             /** @example Ex@mple123! */
             password?: string;
+        };
+        UpdateUserRolesDto: {
+            /** @example [
+             *       "user",
+             *       "admin",
+             *       "owner"
+             *     ] */
+            roles: ("user" | "admin" | "owner")[];
+        };
+        DeleteUsersByLoginDto: {
+            /** @example [
+             *       "user@example.com"
+             *     ] */
+            logins: string[];
         };
         AuthLogDto: {
             ip_address: string;
@@ -293,6 +335,13 @@ export interface components {
              * @example eyJhbGci...
              */
             accessToken: string;
+        };
+        FullUserDto: {
+            user: components["schemas"]["CreateUserDto"];
+            mailbox: components["schemas"]["MailboxDto"];
+        };
+        BulkUsersDto: {
+            users: components["schemas"]["FullUserDto"][];
         };
     };
     responses: never;
@@ -534,63 +583,7 @@ export interface operations {
             };
         };
     };
-    MailboxController_updateFilters: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                userId: number;
-            };
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["MailboxFiltersDto"];
-            };
-        };
-        responses: {
-            /** @description Mailbox filters successfully updated. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["MailboxFiltersDto"];
-                };
-            };
-            /** @description The user is not logged in. */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-            /** @description Forbidden resource */
-            403: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-            /** @description Mailbox not found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-            /** @description Validation error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ValidationErrorResponse"];
-                };
-            };
-        };
-    };
-    UsersController_signup: {
+    UsersController_createUser: {
         parameters: {
             query?: never;
             header?: never;
@@ -669,7 +662,7 @@ export interface operations {
                 };
                 content?: never;
             };
-            /** @description The specified user was not found */
+            /** @description The specified user was not found. */
             404: {
                 headers: {
                     [name: string]: unknown;
@@ -724,7 +717,7 @@ export interface operations {
                 };
                 content?: never;
             };
-            /** @description The specified user was not found */
+            /** @description The specified user was not found. */
             404: {
                 headers: {
                     [name: string]: unknown;
@@ -742,7 +735,107 @@ export interface operations {
             };
         };
     };
-    UsersController_getAll: {
+    UsersController_updateUserRoles: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                userId: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateUserRolesDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UserDto"];
+                };
+            };
+            /** @description The user is not logged in. */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Forbidden resource */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description The specified user was not found. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ValidationErrorResponse"];
+                };
+            };
+        };
+    };
+    UsersController_deleteUsersByLogins: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["DeleteUsersByLoginDto"];
+            };
+        };
+        responses: {
+            /** @description The user is not logged in. */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Forbidden resource */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Some of the specified users were not found. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ValidationErrorResponse"];
+                };
+            };
+        };
+    };
+    UsersController_getAllCreated: {
         parameters: {
             query?: never;
             header?: never;
@@ -935,6 +1028,44 @@ export interface operations {
                 content: {
                     "application/json": components["schemas"]["ValidationErrorResponse"];
                 };
+            };
+        };
+    };
+    BulkController_createFullUsers: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["BulkUsersDto"];
+            };
+        };
+        responses: {
+            /** @description User successfully created. */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UserDto"][];
+                };
+            };
+            /** @description Forbidden resource */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Login already in use. */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
             };
         };
     };

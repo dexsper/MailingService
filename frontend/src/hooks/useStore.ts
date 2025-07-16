@@ -7,6 +7,7 @@ interface UsersTableStore {
 
   add: (user: User) => void;
   remove: (id: number) => void;
+  removeByLogin: (login: string) => void;
   setAll: (users: User[]) => void;
   clear: () => void;
 }
@@ -22,6 +23,11 @@ export const useUsersTableStore = create<UsersTableStore>((set) => ({
   remove: (id) =>
     set((state) => ({
       users: state.users.filter((u) => u.id !== id),
+    })),
+
+  removeByLogin: (login) =>
+    set((state) => ({
+      users: state.users.filter((u) => u.login !== login),
     })),
 
   setAll: (users) => set({ users }),

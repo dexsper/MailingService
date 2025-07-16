@@ -1,4 +1,5 @@
-export type UserRole = 'user' | 'admin';
+export type UserRole = 'user' | 'admin' | 'owner';
+export const UserRoles: UserRole[] = ['user', 'admin', 'owner'];
 
 export interface User {
   id: number;

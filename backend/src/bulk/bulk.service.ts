@@ -14,8 +14,12 @@ export class BulkService {
   ) {}
 
   @Transactional()
-  async createFullUser(fullUserDto: FullUserDto[], createdById?: number) {
+  async createFullUsers(fullUserDto: FullUserDto[], createdById?: number) {
     const result = [];
+
+    fullUserDto = Array.from(
+      new Map(fullUserDto.map((item) => [item.user.login, item])).values(),
+    );
 
     for (const user of fullUserDto) {
       const { user: userDto, mailbox } = user;

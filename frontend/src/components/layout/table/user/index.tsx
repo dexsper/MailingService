@@ -10,6 +10,8 @@ import { useUsersTableStore } from '@/hooks/useStore';
 import { DataTable, DataTableFilter } from '@/components/ui/table/data-table';
 
 import UserCreate from './actions/create';
+import UserBulkDelete from './actions/bulk-delete';
+
 import { getUserColumns } from './columns';
 
 export default function UsersTable() {
@@ -38,7 +40,10 @@ export default function UsersTable() {
       data={users}
       columns={getUserColumns(t)}
       filters={filters}
-      actions={<UserCreate />}
+      actions={[
+        <UserCreate key="user_action_create" />,
+        <UserBulkDelete key="user_action_delete" />,
+      ]}
       isLoading={isLoading}
     />
   );

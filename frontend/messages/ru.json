@@ -44,12 +44,19 @@
   },
   "UserCreate": {
     "Button": "Создать пользователя",
-    "Title": "Создание пользователя",
-    "Description": "Заполните все поля.",
+    "Single": "Одиночный",
+    "Bulk": "Массовый",
+    "SingleTitle": "Создание пользователя",
+    "BulkTitle": "Создание пользователей",
+    "SingleDescription": "Заполните все поля.",
+    "BulkDescription": "Вставьте список в формате: Login:EmailPassword:WebsitePassword:Host",
     "Email": "Email",
     "Password": "Пароль",
     "Create": "Создать",
-    "Conflict": "Указанный email уже занят"
+    "Conflict": "Указанный email уже занят",
+    "Role-user": "Пользователь",
+    "Role-admin": "Админ",
+    "Role-owner": "Владелец"
   },
   "UserEdit": {
     "Title": "Редактировать пользователя",
@@ -65,6 +72,9 @@
     "Password": "Пароль"
   },
   "UserDelete": {
+    "Button": "Удалить пользователей",
+    "BulkTitle": "Удалить пользователей",
+    "BulkDescription": "Вставьте список в формате: Login:EmailPassword:WebsitePassword:Host",
     "Title": "Вы абсолютно уверены?",
     "Description": "Это действие невозможно отменить. Это приведет к необратимому удалению учетной записи.",
     "Cancel": "Отмена",

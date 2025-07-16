@@ -40,7 +40,7 @@ export class UserEntity {
   @JoinColumn({ name: 'createdById' })
   createdBy?: UserEntity;
 
-  @Column({ nullable: true, unique: true })
+  @Column({ nullable: true })
   createdById: number;
 
   @CreateDateColumn({

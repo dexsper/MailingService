@@ -26,10 +26,10 @@ export class BulkController {
     description: 'User successfully created.',
   })
   @ApiConflictResponse({ description: 'Login already in use.' })
-  async createFullUser(
+  async createFullUsers(
     @Body() bulkUsersDto: BulkUsersDto,
     @CurrentUser('id') userId: number,
   ) {
-    return this.bulkService.createFullUser(bulkUsersDto.users, userId);
+    return this.bulkService.createFullUsers(bulkUsersDto.users, userId);
   }
 }
