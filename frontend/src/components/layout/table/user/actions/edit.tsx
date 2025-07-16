@@ -64,21 +64,11 @@ export default function UserEdit({ id }: UserEditProps) {
         },
       },
     });
-  
+
     if (res.data) {
       setMailbox(res.data);
     }
   }, [id]);
-
-  const handlePaste = (e: React.ClipboardEvent<HTMLDivElement>) => {
-    const pastedText: string = e.clipboardData.getData('text');
-    const parseResult = parseMailString(pastedText);
-
-    if (!parseResult) return;
-
-    setUser(parseResult[0]);
-    setMailbox(parseResult[1]);
-  };
 
   const handleUserSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -114,6 +104,23 @@ export default function UserEdit({ id }: UserEditProps) {
     fetchMailbox();
   }, [open, id, fetchMailbox]);
 
+  useEffect(() => {
+    const handler = (e: ClipboardEvent) => {
+      const pastedText = e.clipboardData?.getData('text');
+      if (!pastedText) return;
+      
+      const parseResult = parseMailString(pastedText);
+      if (!parseResult) return;
+      
+      e.preventDefault();
+      setUser(parseResult[0]);
+      setMailbox(parseResult[1]);
+    };
+
+    window.addEventListener('paste', handler);
+    return () => window.removeEventListener('paste', handler);
+  }, []);
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
@@ -121,7 +128,7 @@ export default function UserEdit({ id }: UserEditProps) {
           <Pencil />
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-md" onPaste={handlePaste}>
+      <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>{t('Title')}</DialogTitle>
           <DialogDescription>{t('Description')}</DialogDescription>
