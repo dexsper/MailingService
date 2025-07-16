@@ -39,16 +39,16 @@ export class UsersController {
     description: 'User successfully created.',
   })
   @ApiConflictResponse({ description: 'Login already in use.' })
-  signup(@Body() createDto: CreateUserDto) {
+  createUser(@Body() createDto: CreateUserDto) {
     return this.usersService.create(createDto.login, createDto.password);
   }
 
   @Patch(':userId')
-  @Roles(['Admin'])
+  @Roles(['Owner'], ['UserOwner'])
   @SerializeOptions({ type: UserDto })
   @ApiOperation({ summary: 'Update the specified user.' })
   @ApiOkResponse({ type: UserDto })
-  @ApiNotFoundResponse({ description: 'The specified user was not found' })
+  @ApiNotFoundResponse({ description: 'The specified user was not found.' })
   updateUser(
     @Param('userId') userId: number,
     @Body() updateDto: UpdateUserDto,
@@ -57,10 +57,10 @@ export class UsersController {
   }
 
   @Delete(':userId')
-  @Roles(['Admin'])
+  @Roles(['Owner'], ['UserOwner'])
   @SerializeOptions({ type: UserDto })
   @ApiOperation({ summary: 'Delete the specified user.' })
-  @ApiNotFoundResponse({ description: 'The specified user was not found' })
+  @ApiNotFoundResponse({ description: 'The specified user was not found.' })
   deleteUser(@Param('userId') userId: number) {
     return this.usersService.deleteById(userId);
   }
@@ -68,10 +68,10 @@ export class UsersController {
   @Get('all')
   @Roles(['Admin'])
   @SerializeOptions({ type: UserDto })
-  @ApiOperation({ summary: 'Get all users.' })
+  @ApiOperation({ summary: 'Get all users created by the admin.' })
   @ApiOkResponse({ isArray: true, type: UserDto })
-  getAll() {
-    return this.usersService.getAll();
+  getAllCreated(@CurrentUser('id') userId: number) {
+    return this.usersService.getAll(userId);
   }
 
   @Get('me')

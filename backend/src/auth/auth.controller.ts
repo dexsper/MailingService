@@ -32,7 +32,7 @@ export class AuthController {
   constructor(private authService: AuthService) {}
 
   @Get(':userId/history')
-  @Roles(['Admin'])
+  @Roles(['Owner'], ['UserOwner'])
   @SerializeOptions({ type: AuthLogDto })
   @ApiOperation({ summary: 'Get the user authorization history' })
   @ApiOkResponse({

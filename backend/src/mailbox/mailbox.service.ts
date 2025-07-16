@@ -24,7 +24,7 @@ export class MailboxService {
     @InjectRepository(MailboxEntity)
     private readonly mailboxRepository: Repository<MailboxEntity>,
     private readonly usersService: UsersService,
-    private configService: ConfigService,
+    configService: ConfigService,
   ) {
     this.imapConfig = configService.get<ImapConfig>('imap');
   }

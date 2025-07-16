@@ -2,6 +2,8 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -9,6 +11,7 @@ import {
 export enum UserRole {
   User = 'user',
   Admin = 'admin',
+  Owner = 'owner',
 }
 
 @Entity('users')
@@ -32,6 +35,13 @@ export class UserEntity {
     default: [UserRole.User],
   })
   roles: UserRole[];
+
+  @ManyToOne(() => UserEntity, { nullable: true })
+  @JoinColumn({ name: 'createdById' })
+  createdBy?: UserEntity;
+
+  @Column({ nullable: true, unique: true })
+  createdById: number;
 
   @CreateDateColumn({
     type: 'timestamp with time zone',

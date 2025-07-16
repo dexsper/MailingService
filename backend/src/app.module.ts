@@ -12,6 +12,7 @@ import { AuthModule } from './auth/auth.module';
 import { RbacModule } from './rbac/rbac.module';
 
 import { AppService } from './app.service';
+import { RelationModule } from './relation/relation.module';
 
 @Module({
   imports: [
@@ -38,6 +39,7 @@ import { AppService } from './app.service';
     UsersModule,
     AuthModule,
     RbacModule,
+    RelationModule,
   ],
   controllers: [],
   providers: [AppService],

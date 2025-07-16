@@ -21,6 +21,7 @@ export class UsersService {
     login: string,
     password: string,
     roles: UserRole[] = [UserRole.User],
+    createdById?: number,
   ): Promise<UserEntity> {
     const existingUser = await this.usersRepository.findOne({
       where: [{ login }],
@@ -36,10 +37,24 @@ export class UsersService {
       login,
       password: await hashPassword(password),
       roles,
+      createdById,
     });
 
     await this.usersRepository.insert(newUser);
     return newUser;
+  }
+
+  async getOwnerId(userId: number) {
+    const user = await this.usersRepository.findOne({
+      where: {
+        id: userId,
+      },
+      select: {
+        createdById: true,
+      },
+    });
+
+    return user.createdById;
   }
 
   async updateById(id: number, data: Partial<UserEntity>): Promise<UserEntity> {
@@ -83,7 +98,11 @@ export class UsersService {
     return user;
   }
 
-  async getAll(): Promise<UserEntity[]> {
-    return await this.usersRepository.find();
+  async getAll(createdById?: number): Promise<UserEntity[]> {
+    return await this.usersRepository.find({
+      where: {
+        createdById,
+      },
+    });
   }
 }

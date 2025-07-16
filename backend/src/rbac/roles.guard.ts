@@ -2,6 +2,8 @@ import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 
 import { UserRole } from '../users/user.entity';
+
+import { UserRelationRole } from '../relation/roles';
 import { RbacService } from './rbac.service';
 
 @Injectable()
@@ -17,11 +19,20 @@ export class RolesGuard implements CanActivate {
       context.getClass(),
     ]);
 
-    if (!generalRoles?.length) {
+    const relationRoles = this.reflector.getAllAndOverride<UserRelationRole[]>(
+      'relationRoles',
+      [context.getHandler(), context.getClass()],
+    );
+
+    if (!(generalRoles?.length || relationRoles?.length)) {
       return true;
     }
 
     const request = context.switchToHttp().getRequest();
-    return await this.rbacService.authorize(request, generalRoles);
+    return await this.rbacService.authorize(
+      request,
+      generalRoles,
+      relationRoles,
+    );
   }
 }

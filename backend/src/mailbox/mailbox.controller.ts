@@ -21,12 +21,7 @@ import { ApiJwtAuth, CurrentUser } from '../auth/decorators';
 import { ApiValidationError } from '../common/decorators/validation.decorator';
 
 import { MailboxService } from './mailbox.service';
-import {
-  MailboxDto,
-  MailboxFiltersDto,
-  MessagePreviewDto,
-  MessageDto,
-} from './mailbox.dto';
+import { MailboxDto, MessagePreviewDto, MessageDto } from './mailbox.dto';
 
 @ApiJwtAuth()
 @Controller('mailbox')
@@ -68,7 +63,7 @@ export class MailboxController {
   }
 
   @Get(':userId/client')
-  @Roles(['Admin'])
+  @Roles(['Owner'], ['UserOwner'])
   @SerializeOptions({ type: MailboxDto })
   @ApiOperation({ summary: 'Get user mailbox' })
   @ApiOkResponse({ type: MailboxDto })
@@ -80,7 +75,7 @@ export class MailboxController {
   }
 
   @Put(':userId/client')
-  @Roles(['Admin'])
+  @Roles(['Owner'], ['UserOwner'])
   @SerializeOptions({ type: MailboxDto })
   @ApiOperation({ summary: 'Create or update user mailbox' })
   @ApiOkResponse({
@@ -98,7 +93,7 @@ export class MailboxController {
   }
 
   @Get(':userId/client/check')
-  @Roles(['Admin'])
+  @Roles(['Owner'], ['UserOwner'])
   @SerializeOptions({ type: MailboxDto })
   @ApiOperation({ summary: 'Check user mailbox' })
   @ApiNotFoundResponse({

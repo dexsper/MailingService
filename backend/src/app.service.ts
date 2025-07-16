@@ -26,6 +26,7 @@ export class AppService implements OnModuleInit {
       await this.usersService.create(login, password, [
         UserRole.User,
         UserRole.Admin,
+        UserRole.Owner,
       ]);
 
       this.logger.log(
