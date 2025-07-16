@@ -8,8 +8,9 @@ import {
 import { UserDto } from 'src/users/user.dto';
 
 import { Roles } from 'src/rbac';
-import { FullUserDto } from './bulk.dto';
+import { BulkUsersDto } from './bulk.dto';
 import { BulkService } from './bulk.service';
+import { CurrentUser } from 'src/auth/decorators';
 
 @Controller('bulk')
 export class BulkController {
@@ -25,7 +26,10 @@ export class BulkController {
     description: 'User successfully created.',
   })
   @ApiConflictResponse({ description: 'Login already in use.' })
-  async createFullUser(@Body() fullUserDto: FullUserDto[]) {
-    return this.bulkService.createFullUser(fullUserDto);
+  async createFullUser(
+    @Body() bulkUsersDto: BulkUsersDto,
+    @CurrentUser('id') userId: number,
+  ) {
+    return this.bulkService.createFullUser(bulkUsersDto.users, userId);
   }
 }

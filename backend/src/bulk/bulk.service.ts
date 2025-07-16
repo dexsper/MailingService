@@ -14,7 +14,7 @@ export class BulkService {
   ) {}
 
   @Transactional()
-  async createFullUser(fullUserDto: FullUserDto[]) {
+  async createFullUser(fullUserDto: FullUserDto[], createdById?: number) {
     const result = [];
 
     for (const user of fullUserDto) {
@@ -23,6 +23,8 @@ export class BulkService {
       const newUser = await this.usersService.create(
         userDto.login,
         userDto.password,
+        undefined,
+        createdById,
       );
 
       await this.mailboxService.upsertMailbox(newUser.id, mailbox);

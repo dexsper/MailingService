@@ -39,8 +39,16 @@ export class UsersController {
     description: 'User successfully created.',
   })
   @ApiConflictResponse({ description: 'Login already in use.' })
-  createUser(@Body() createDto: CreateUserDto) {
-    return this.usersService.create(createDto.login, createDto.password);
+  createUser(
+    @Body() createDto: CreateUserDto,
+    @CurrentUser('id') userId: number,
+  ) {
+    return this.usersService.create(
+      createDto.login,
+      createDto.password,
+      undefined,
+      userId,
+    );
   }
 
   @Patch(':userId')
