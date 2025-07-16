@@ -24,9 +24,9 @@ export class UserRelationResolver implements IRelationResolver {
     }
 
     const relations = [];
-    const ownerId = await this.usersService.getOwnerId(userId);
+    const targetUser = await this.usersService.getById(userId);
 
-    if (ownerId === user.id) {
+    if (targetUser.createdById === user.id || targetUser.id === user.id) {
       relations.push(UserRelationRole.UserOwner);
     }
 

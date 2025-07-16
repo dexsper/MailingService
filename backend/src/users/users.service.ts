@@ -44,19 +44,6 @@ export class UsersService {
     return newUser;
   }
 
-  async getOwnerId(userId: number) {
-    const user = await this.usersRepository.findOne({
-      where: {
-        id: userId,
-      },
-      select: {
-        createdById: true,
-      },
-    });
-
-    return user.createdById;
-  }
-
   async updateById(id: number, data: Partial<UserEntity>): Promise<UserEntity> {
     const user = await this.getById(id);
     const updateData: Partial<UserEntity> = { ...data };
@@ -100,9 +87,7 @@ export class UsersService {
 
   async getAll(createdById?: number): Promise<UserEntity[]> {
     return await this.usersRepository.find({
-      where: {
-        createdById,
-      },
+      where: [{ createdById }, { id: createdById }],
     });
   }
 }

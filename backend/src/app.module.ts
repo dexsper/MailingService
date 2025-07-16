@@ -4,6 +4,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { CacheModule } from '@nestjs/cache-manager';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 
+import { DataSource } from 'typeorm';
+import { addTransactionalDataSource } from 'typeorm-transactional';
+
 import config from './common/configs/config';
 
 import { MailboxModule } from './mailbox/mailbox.module';
@@ -13,6 +16,7 @@ import { RbacModule } from './rbac/rbac.module';
 
 import { AppService } from './app.service';
 import { RelationModule } from './relation/relation.module';
+import { BulkModule } from './bulk/bulk.module';
 
 @Module({
   imports: [
@@ -34,12 +38,20 @@ import { RelationModule } from './relation/relation.module';
         autoLoadEntities: true,
         synchronize: true,
       }),
+      async dataSourceFactory(options) {
+        if (!options) {
+          throw new Error('Invalid options passed');
+        }
+
+        return addTransactionalDataSource(new DataSource(options));
+      },
     }),
     MailboxModule,
     UsersModule,
     AuthModule,
     RbacModule,
     RelationModule,
+    BulkModule,
   ],
   controllers: [],
   providers: [AppService],

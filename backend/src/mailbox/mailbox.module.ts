@@ -11,5 +11,6 @@ import { MailboxEntity } from './mailbox.entity';
   imports: [TypeOrmModule.forFeature([MailboxEntity]), UsersModule],
   controllers: [MailboxController],
   providers: [MailboxService],
+  exports: [MailboxService],
 })
 export class MailboxModule {}

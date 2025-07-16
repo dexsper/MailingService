@@ -2,6 +2,8 @@ import { ConfigService } from '@nestjs/config';
 import { NestFactory, Reflector } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
+import { initializeTransactionalContext } from 'typeorm-transactional';
+
 import {
   BadRequestException,
   ClassSerializerInterceptor,
@@ -14,6 +16,8 @@ import { AppModule } from './app.module';
 import { NestConfig, SwaggerConfig } from './common/configs';
 
 async function bootstrap() {
+  initializeTransactionalContext();
+
   const app = await NestFactory.create(AppModule);
   const logger = new Logger('Bootstrap');
 
