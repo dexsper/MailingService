@@ -56,9 +56,10 @@ export class AuthController {
   signIn(@Req() req: Request, @Body() authDto: AuthDto) {
     const userAgent = req.headers['user-agent'];
     const forwarded = req.headers['x-forwarded-for'];
-    const clientIP = typeof forwarded === 'string'
-      ? forwarded.split(',')[0].trim()
-      : req.socket.remoteAddress;
+    const clientIP =
+      typeof forwarded === 'string'
+        ? forwarded.split(',')[0].trim()
+        : req.socket.remoteAddress;
 
     return this.authService.signIn(
       authDto.login,

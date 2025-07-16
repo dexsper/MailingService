@@ -67,9 +67,9 @@ export class AuthService {
 
   async getAuthHistory(userId: number) {
     return await this.authLogRepository
-      .createQueryBuilder("log")
-      .addSelect("log.createdDate")
-      .where("log.userId = :userId", { userId })
+      .createQueryBuilder('log')
+      .addSelect('log.createdDate')
+      .where('log.userId = :userId', { userId })
       .getMany();
   }
 }

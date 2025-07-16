@@ -8,10 +8,7 @@ import { MailboxController } from './mailbox.controller';
 import { MailboxEntity } from './mailbox.entity';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([MailboxEntity]),
-    UsersModule,
-  ],
+  imports: [TypeOrmModule.forFeature([MailboxEntity]), UsersModule],
   controllers: [MailboxController],
   providers: [MailboxService],
 })
