@@ -6,7 +6,7 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "format": "prettier --write .",
     "generate:api": "npx openapi-typescript http://localhost:3001/docs-json -o ./src/lib/api/v1.d.ts"
   },

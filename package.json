@@ -30,12 +30,12 @@
   },
   "lint-staged": {
     "backend/**/*.{js,ts}": [
-      "cd backend && npm run lint",
-      "cd backend && npm run format"
+      "npm --prefix backend run lint --",
+      "npm --prefix backend run format"
     ],
     "frontend/**/*.{js,ts,tsx}": [
-      "cd frontend && npm run lint",
-      "cd frontend && npm run format"
+      "npm --prefix frontend run lint --",
+      "npm --prefix frontend run format"
     ]
   }
 }
