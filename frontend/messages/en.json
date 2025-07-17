@@ -32,7 +32,7 @@
   },
   "UserNav": {
     "Admin": "Admin",
-    "Settings": "Settings",
+    "AuthHistory": "Auth History",
     "Logout": "Log out"
   },
   "UserTable": {
@@ -82,7 +82,7 @@
   },
   "UserHistory": {
     "Title": "Login History",
-    "Description": "This section displays the user's login history.",
+    "Description": "This section displays the login history.",
     "IP": "IP Address",
     "UserAgent": "User-Agent",
     "Country": "Country",

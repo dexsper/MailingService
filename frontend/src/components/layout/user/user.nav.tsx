@@ -1,6 +1,6 @@
 'use client';
 
-import { EllipsisVertical, LogOut, ShieldUser } from 'lucide-react';
+import { EllipsisVertical, History, LogOut, ShieldUser } from 'lucide-react';
 
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
@@ -19,6 +19,8 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from '@/components/ui/shared/sidebar';
+
+import UserAuthHistory from './user.auth-history';
 
 export function NavUser() {
   const t = useTranslations('UserNav');
@@ -69,6 +71,18 @@ export function NavUser() {
                 {t('Admin')}
               </DropdownMenuItem>
             )}
+            <DropdownMenuItem
+              onSelect={(e) => {
+                e.preventDefault();
+              }}
+            >
+              <UserAuthHistory id={user.id}>
+                <div className="flex items-center gap-2 ">
+                  <History />
+                  {t('AuthHistory')}
+                </div>
+              </UserAuthHistory>
+            </DropdownMenuItem>
             <DropdownMenuItem onClick={handleLogout}>
               <LogOut />
               {t('Logout')}
